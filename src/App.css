@@ -14,11 +14,67 @@
   color: white;
 }
 
-.App-intro {
-  font-size: large;
+button {
+  font-family: 'Roboto Slab', serif;
+  background-color: rgb(165, 153, 212);
+  border: none;
+  display: inline-block;
+  color: rgb(73, 73, 73);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+  width: 90px;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+button:hover {
+  background-color: rgb(136, 64, 150);
+  transition: all .2s;
+}
+button:focus {
+  border: none;
+  outline: none;
+}
+
+.display {
+  font-family: 'Roboto Slab', serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.screen {
+  background-color: rgb(82, 82, 82);
+  width: 270px;
+  text-align: right;
+  justify-content: center;
+  color: black;
+  font-size: 24px;
+}
+
+.blink {
+    -webkit-animation: 2s linear infinite condemed_blink_effect; // for android
+    animation: 2s linear infinite condemed_blink_effect;
+}
+@-webkit-keyframes condemed_blink_effect { // for android
+    0% {
+        visibility: hidden;
+    }
+    50% {
+        visibility: hidden;
+    }
+    100% {
+        visibility: visible;
+    }
+}
+@keyframes condemed_blink_effect {
+    0% {
+        visibility: hidden;
+    }
+    50% {
+        visibility: hidden;
+    }
+    100% {
+        visibility: visible;
+    }
 }

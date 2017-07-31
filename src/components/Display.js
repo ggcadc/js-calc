@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { pressed } from './Buttons'
+import { pushedButtons} from './Buttons'
 
 class Display extends Component {
   render (){

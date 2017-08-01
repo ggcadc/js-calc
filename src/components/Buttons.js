@@ -1,22 +1,45 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { doMath } from '../CalcFuncs'
 
 let probArray = [];
 
-class Buttons extends React.Component {
+class Buttons extends Component {
 
   pushedButtons(event, num) {
     event.preventDefault();
 
     if(typeof num === 'number'){
-      if(probArray[0] && probArray.length === 1)
-      num = Number(probArray[0].toString() + num.toString())
-      probArray[0] = num
-    }
-    if(typeof num === 'string'){
+      //pushes multiple numbers to place 0
+      if(!probArray[0] || probArray[0] === 0){
+        probArray.push(num);
+        this.props.problemState(probArray);
+        return;
+      }
+      if(probArray[0] && probArray.length === 1){
+        num = Number(probArray[0].toString() + num.toString())
+        probArray[0] = num;
+      }
 
-      probArray.push(num)
+      //pushes multiple numbers to place 2
+      if(probArray[1]){
+        if(!probArray[2]){
+          probArray.push(num)
+        }else{
+          num = Number(probArray[2].toString() + num.toString())
+          probArray[2] = num;
+        }
+      }
     }
-    console.log(probArray);
+
+    //pushes operator to place 1 in array
+    if(typeof num === 'string' && probArray.length === 1){
+        probArray.push(num)
+    }
+    this.props.problemState(probArray)
+    if(num === 'CLR'){
+      this.props.clearButton();//clearing function
+      probArray = [];
+    }
   }
 
   render (){
@@ -50,7 +73,10 @@ class Buttons extends React.Component {
           <div className="functions">
             <button onClick={(e) => this.pushedButtons(e, 'x')}>X</button>
             <button onClick={(e) => this.pushedButtons(e, '/')}>/</button>
-            <button onClick={(e) => this.pushedButtons(e, '=')}>=</button>
+            <button onClick={(e) => {
+              this.props.problemState(doMath(e, probArray));
+              probArray = [doMath(e, probArray)]
+            }}>=</button>
           </div>
         </form>
       </div>
